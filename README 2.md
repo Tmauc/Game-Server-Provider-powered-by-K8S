@@ -1,3 +1,0 @@
-# GameServerApi
-
-GameServer Provider project
