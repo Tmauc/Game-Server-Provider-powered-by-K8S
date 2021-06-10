@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apideployment
+  labels:
+    app: apideployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apideployment
+  template:
+    metadata:
+      labels:
+        app: apideployment
+    spec:
+      containers:
+        - name: api
+          image: rg.fr-par.scw.cloud/game-server/api:latest
+      imagePullSecrets:
+        - name: eyJhdXRocyI6eyJyZy5mci1wYXIuc2N3LmNsb3VkIjp7InVzZXJuYW1lIjoicm9uYW4iLCJwYXNzd29yZCI6ImY0ZmZjNDZmLTRiZDYtNDMyMi04OGQ1LTkyNTRhMjlmOWRkYSIsImVtYWlsIjoicm9uYW4uYm91emlhbmVAZXBpdGVjaC5ldSIsImF1dGgiOiJjbTl1WVc0NlpqUm1abU0wTm1ZdE5HSmtOaTAwTXpJeUxUZzRaRFV0T1RJMU5HRXlPV1k1WkdSaCJ9fX0=

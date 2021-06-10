@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-name
+  labels:
+    app: deployment-name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-name
+  template:
+    metadata:
+      labels:
+        app: deployment-name
+    spec:
+      volumes:
+        - name: server-volume
+          persistentVolumeClaim:
+            claimName: server-pvc-name
+      containers:
+        - name: game-server-container
+          image: namespace-server-image-name
+          env:
+            - name: EULA
+              value: "TRUE"
+          ports:
+            - protocol: TCP
+              containerPort: 25565
+          volumeMounts:
+            - name: server-volume
+              mountPath: /data
+        - name: my-ftp-container
+          image: stilliard/pure-ftpd
+          ports:
+            - protocol: TCP
+              containerPort: 21
+          volumeMounts:
+          - mountPath: /home/user
+            name: server-volume
+          env:
+          - name: FTP_USER_NAME
+            value: "user"
+          - name: FTP_USER_PASS
+            value: "pass1234"
+          - name: FTP_USER_HOME
+            value: "/home/user"
+          - name: FTP_MAX_CLIENTS
+            value: "1000"
+          - name: FTP_MAX_CONNECTIONS
+            value: "10000"
+      imagePullSecrets:
+        - name: eyJhdXRocyI6eyJyZy5mci1wYXIuc2N3LmNsb3VkIjp7InVzZXJuYW1lIjoicm9uYW4iLCJwYXNzd29yZCI6ImY0ZmZjNDZmLTRiZDYtNDMyMi04OGQ1LTkyNTRhMjlmOWRkYSIsImVtYWlsIjoicm9uYW4uYm91emlhbmVAZXBpdGVjaC5ldSIsImF1dGgiOiJjbTl1WVc0NlpqUm1abU0wTm1ZdE5HSmtOaTAwTXpJeUxUZzRaRFV0T1RJMU5HRXlPV1k1WkdSaCJ9fX0=

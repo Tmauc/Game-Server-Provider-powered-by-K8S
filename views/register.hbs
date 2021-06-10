@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Register</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="/register.css">
+</head>
+
+<body>
+	<nav>
+		<h4>My game server Server</h4>
+		<ul>
+			<li> <a href="/login">Login</a> </li>
+			<li> <a href="/loginAdmin">Admin</a> </li>
+		</ul>
+	</nav>
+	<div class="login-form">
+		<h1>Register</h1>
+		<form action="user/register" method="POST">
+			<input type="text" name="name" placeholder="Name" required>
+			<input type="text" name="email" placeholder="Email" required>
+			<input type="password" name="password" placeholder="Password" required>
+			<input type="submit">
+		</form>
+	</div>
+</body>
+
+</html>

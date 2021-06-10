@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-name
+spec:
+  selector:
+    app: deployment-name
+  ports:
+    - protocol: TCP
+      port: 25565
+      name: game
+    - protocol: TCP
+      port: 21
+      name: ftp-protocol
+  type: LoadBalancer

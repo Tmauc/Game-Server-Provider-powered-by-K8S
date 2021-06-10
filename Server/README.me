@@ -1,0 +1,14 @@
+APPLY
+- kubectl --kubeconfig .kube/config.yaml apply -f defaultDeployment.yaml
+- kubectl --kubeconfig .kube/config.yaml apply -f defaultService.yaml 
+
+GET
+- kubectl --kubeconfig .kube/config.yaml get pods 
+- kubectl --kubeconfig .kube/config.yaml get svc 
+
+DELETE
+- kubectl --kubeconfig .kube/config.yaml delete deployment CONTAINER
+- kubectl --kubeconfig .kube/config.yaml delete svc SERVICE
+
+LOG
+ - kubectl --kubeconfig .kube/config.yaml logs NAMEDEPLOYMENT CONTAINER

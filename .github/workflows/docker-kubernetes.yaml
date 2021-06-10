@@ -1,0 +1,29 @@
+name: Docker-Kubernetes Game Server
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker login
+      env:
+        SCALEWAY_NAMESPACE: ${{ secrets.SCALEWAY_NAMESPACE }}   
+        SCALEWAY_PASSWORD: ${{ secrets.SCALEWAY_PASSWORD }}  
+      run: |
+        docker login $SCALEWAY_NAMESPACE -u nologin -p $SCALEWAY_PASSWORD
+    - name: Docker build api
+      run: |
+        docker build -t rg.fr-par.scw.cloud/game-server/api:latest .
+    - name: Docker push
+      run: |
+        docker push rg.fr-par.scw.cloud/game-server/api:latest
+    - name: Delete previous deployment
+      run: |
+        kubectl --kubeconfig .kube/config.yaml delete deployment apideployment
+    - name: Deploy to kubernetes
+      run: |
+        kubectl --kubeconfig .kube/config.yaml apply -f deployment.yaml
+    - name: Verify deployment
+      run: |
+        kubectl --kubeconfig .kube/config.yaml rollout status deployment/apideployment

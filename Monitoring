@@ -1,0 +1,4 @@
+Use Grafana:
+- kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+Use password in login grafana page with admin user
+- kubectl port-forward --namespace monitoring service/grafana 3000:80
